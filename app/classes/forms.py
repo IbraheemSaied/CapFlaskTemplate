@@ -58,10 +58,13 @@ class ProfileForm(FlaskForm):
     lname = StringField('Last Name', validators=[DataRequired()]) 
     image = FileField("Image") 
     submit = SubmitField('Post')
+    role = SelectField('Role',choices=[("Teacher","Teacher"),("Student","Student")])
+    phoneNumber = StringField('Phone Number', validators=[DataRequired()])
 
 class PostForm(FlaskForm):
     subject = StringField('Subject', validators=[DataRequired()])
     content = TextAreaField('Post', validators=[DataRequired()])
+    reason = SelectField('Reason For Complaint',choices=[("Technical","A Technical Issue"),("Exposure","Expose Scammer"), ("General", "A General Question"), ("Other", "Other")])
     submit = SubmitField('Post')
 
 class CommentForm(FlaskForm):

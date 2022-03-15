@@ -140,6 +140,7 @@ def postEdit(postID):
         editPost.update(
             subject = form.subject.data,
             content = form.content.data,
+            reason = form.reason.data,
             modifydate = dt.datetime.utcnow
         )
         # After updating the document, send the user to the updated post using a redirect.
@@ -149,6 +150,7 @@ def postEdit(postID):
     # and place it in the form object so it will be displayed to the user on the template.
     form.subject.data = editPost.subject
     form.content.data = editPost.content
+    form.reason.data = editPost.reason
 
     # Send the user to the post form that is now filled out with the current information
     # from the form.

@@ -22,6 +22,14 @@
                 {% endfor %}
             </p>
             <p>
+                {{ form.reason.label }} <br>
+                {{ form.reason(cols=64) }}
+                <!--List the errors for this field-->
+                {% for error in form.reason.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>            
+            <p>
                 {{form.submit()}}
             </p>
         </form>

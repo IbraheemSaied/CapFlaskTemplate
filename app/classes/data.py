@@ -21,6 +21,8 @@ class User(UserMixin, Document):
     lname = StringField()
     email = EmailField()
     image = FileField()
+    role = StringField()
+    phoneNumber = StringField()
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -48,6 +50,7 @@ class Post(Document):
     content = StringField()
     createdate = DateTimeField(default=dt.datetime.utcnow)
     modifydate = DateTimeField()
+    reason = StringField()
 
     meta = {
         'ordering': ['-createdate']

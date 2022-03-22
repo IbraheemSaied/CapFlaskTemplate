@@ -9,26 +9,35 @@
 </h1>
 
 
-<div class="row">
-    <div class="col-2">
+<!--<div class="row">-->
+    <div class="col-3">
         {% if current_user.image %}
             <img class="img-thumbnail img-fluid" src="data:image;base64,{{base64encode(current_user.image.read())}}"> <br>
         {% else %}
             <img class="img-thumbnail" width = "100" src="/static/bdog.jpg">
         {% endif %} 
     </div>
-    <div class="col display-5">
+    <!--<div class="col display-5">-->
+    <div class="display-6">
+    <!--Real Name-->
         {% if current_user.fname and current_user.lname %}
-            Real Name: {{current_user.fname}}  {{current_user.lname}} <br>
+            {{current_user.fname}}  {{current_user.lname}} <br>
         {% endif %}
-        
-        Username: {{current_user.username}} <br>
-        Email: {{current_user.email}}
-        Role: {{current_user.role}} <br>
-        Phone Number: {{current_user.phoneNumber}}
     </div>
-</div>
-<br>
+    <div class="display-7">
+        <!--Username-->
+         {{current_user.username}} <br>
+    </div>
+    <div class="display-8">
+        <!--Email and phonenumber-->
+        {{current_user.email}} · {{current_user.phoneNumber}}<br>
+        <!--Role-->
+        {{current_user.role}} <br>
+        
+    </div>
+   <!--</div>-->
+<!--</div>
+<br>-->
 
 
 

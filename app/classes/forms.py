@@ -1,5 +1,5 @@
 # This file is where data entry forms are created. Forms are placed on templates 
-# and users fill them out.  Each form is an instance of a class. Forms are managed by the 
+# and users fill them out.  Each form is an instance of of a class. Forms are managed by the 
 # Flask-WTForms library.
 
 from flask.app import Flask
@@ -7,15 +7,17 @@ from flask import flash
 from flask_wtf import FlaskForm
 from mongoengine.fields import EmailField
 import mongoengine.errors
+#from wtforms.fields.html5 import URLField, DateField, DateTimeField, EmailField
 from wtforms.validators import URL, NumberRange, Email, Optional, InputRequired, ValidationError, DataRequired, EqualTo
-from wtforms import PasswordField, StringField, SubmitField, TextAreaField, HiddenField, IntegerField, SelectField, FileField, BooleanField
+from wtforms import PasswordField, StringField, SubmitField, validators, TextAreaField, HiddenField, IntegerField, SelectField, FileField, BooleanField
 from app.classes.data import User
+
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me?')
-    submit = SubmitField()
+    submit = SubmitField('Login')
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
@@ -48,8 +50,7 @@ class ResetPasswordRequestForm(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
-    password2 = PasswordField(
-        'Repeat Password', validators=[DataRequired(), EqualTo('password')])
+    password2 = PasswordField('Repeat Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Request Password Reset')
 
 class ProfileForm(FlaskForm):
@@ -57,12 +58,33 @@ class ProfileForm(FlaskForm):
     lname = StringField('Last Name', validators=[DataRequired()]) 
     image = FileField("Image") 
     submit = SubmitField('Post')
+    role = SelectField('Role',choices=[("Owner","Owner"),("User","User")])
+    phoneNumber = StringField('Phone Number', validators=[DataRequired()])
 
 class PostForm(FlaskForm):
     subject = StringField('Subject', validators=[DataRequired()])
     content = TextAreaField('Post', validators=[DataRequired()])
+    reason = SelectField('Reason For Complaint',choices=[("Technical","A Technical Issue"),("Exposure","Expose Scammer"), ("General", "A General Question"), ("Other", "Other")])
     submit = SubmitField('Post')
 
 class CommentForm(FlaskForm):
     content = TextAreaField('Comment', validators=[DataRequired()])
     submit = SubmitField('Comment')
+
+class ScammerForm(FlaskForm):
+    scamNumber = StringField("Scammer's Phone Number", validators=[DataRequired()])
+    country = StringField("Their Country (Location)", validators=[DataRequired()])
+    #SelectField((country.alpha_2, country.name) for country in pycountry.countries)
+    intention = StringField('Their Attempt', validators=[DataRequired()])
+    submit = SubmitField("Submit")
+
+class MessageForm(FlaskForm):
+    status = SelectField("Status", choices=[("",""),("Spam","Spam"),("Not Spam","Not Spam")])
+    submit = SubmitField("Save")
+
+
+class SendMessageForm(FlaskForm):
+    body = TextAreaField("Message")
+    to = StringField("To")
+    submit = SubmitField("Send")
+

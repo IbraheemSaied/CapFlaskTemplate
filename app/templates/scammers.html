@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<!--
+
+    <style type="text/css">
+        .context-menu {
+            position: absolute;
+            text-align: center;
+            background: white;
+            border: 1px solid black;
+        }
+  
+        .context-menu ul {
+            padding: 0px;
+            margin: 0px;
+            min-width: 100px;
+            list-style: none;
+        }
+  
+        .context-menu ul li {
+            padding-bottom: 7px;
+            padding-top: 7px;
+            border: 1px solid white;
+        }
+  
+        .context-menu ul li a {
+            text-decoration: none;
+            color: black;
+        }
+  
+        .context-menu ul li:hover {
+            background: white;
+        }
+    </style>
+  
+
+  
+    <div id="contextMenu" class="context-menu" style="display:none">
+        <ul>
+            <li><a href="#">Delete</a></li>
+            <li><a href="#">Edit</a></li>
+        </ul>
+    </div>
+
+  
+    <script>
+        document.onclick = hideMenu;
+        document.oncontextmenu = rightClick;
+  
+        function hideMenu() {
+            document.getElementById(
+                "contextMenu").style.display = "none"
+        }
+  
+        function rightClick(e) {
+            e.preventDefault();
+  
+            if (document.getElementById(
+                "contextMenu").style.display == "block")
+                hideMenu();
+            else {
+                var menu = document
+                    .getElementById("contextMenu")
+                      
+                menu.style.display = 'block';
+                menu.style.left = e.pageX + "px";
+                menu.style.top = e.pageY + "px";
+            }
+        }
+    </script>
+
+-->
+
+
+
+<div class="row">
+    <div class="col-4">
+        <center>
+        <h5 class="display-5">All Scammers</h5>
+        </center>
+    </div>
+    <div class="col">
+        <a href="/scammer/new" class="btn btn-primary btn-sm mt-7 mr-2" role="button">Reveal New Scammer</a>
+    </div>
+</div>
+
+{% if scammers %}
+    {% for scammer in scammers %}
+        <div class="row border-bottom">
+            <div class="col-1">
+                {% if loop.index == 1 %}
+                <h5 class="display-7"></h5>
+                {% endif %}
+                <a href="/scammer/delete/{{scammer.id}}">
+                    Del
+                </a>
+                 - 
+                 <a href="/scammer/edit/{{scammer.id}}">
+                    edit
+                </a>                                 
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                <h5 class="display-7">Date</h5>
+                {% endif %}
+
+                <a href="/scammer/{{scammer.id}}">
+                    {{moment(scammer.createdate).calendar()}}
+                </a>
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                <h5 class="display-7">Reporter</h5>
+                {% endif %}
+                {{scammer.reporter.username}}
+            </div>
+            <div class="col">
+                {% if loop.index == 1 %}
+                    <h5 class="display-7">Scammer's Number</h5>
+                {% endif %}
+                {{scammer.scamNumber}}
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                    <h5 class="display-7">Country</h5>
+                {% endif %}
+                {{scammer.country}}
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                    <h5 class="display-7">Intention</h5>
+                {% endif %}
+                {{scammer.intention}}
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <h1>No Scammers</h1>
+{% endif %}
+
+{% endblock %}

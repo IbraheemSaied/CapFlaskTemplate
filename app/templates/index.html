@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 
 {% block body %}
+<link rel="stylesheet" href="/static/index.css">
+<center>
+<h1 style="font-family:courier New">Welcome To Scam Filter!</h1>
+<img src="https://image.shutterstock.com/image-vector/contact-us-icons-simple-flat-260nw-1550990354.jpg">
+<h3 class = "tab" style="font-family:courier New"> This is the app where you are going to be able to filter the calls that you get in order to prevent yourself from falling victim to a SCAM CALL. This app is totally free and there are no premiums or subcription bonuses. This free version comes in a all-in-one package.</h3>
+<h3 class = "tab" style="font-family:courier New">All you have to do this create an account! If you don't have an account, please register</h3>
+<h3 style="font-family:courier New"> <a href="{{ url_for('register') }}">here!</a></p>
 
-<h1>Hello World</h1>
+
+</center>
+
 
 {% endblock %}

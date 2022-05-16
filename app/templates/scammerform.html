@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block body %}
+        <h1>Scammer form</h1>
+
+            <!--List all errors in a group at the top-->
+            {% for field in scammerForm.errors %}
+                {% for error in scammerForm.errors[field] %}
+                    <div class="alert alert-error">
+                        <strong>Error!</strong>{{field}}: {{error}}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+        <form method="post">
+            {{ scammerForm.hidden_tag() }}
+            <p>
+                {{ scammerForm.scamNumber.label }} <br>
+                {{ scammerForm.scamNumber(col=64) }}
+                <!--List the errors for this field-->
+                {% for error in scammerForm.scamNumber.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ scammerForm.country.label }} <br>
+                {{ scammerForm.country(cols=64) }}
+                <!--List the errors for this field-->
+                {% for error in scammerForm.country.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ scammerForm.intention.label }} <br>
+                {{ scammerForm.intention(cols=64) }}
+                <!--List the errors for this field-->
+                {% for error in scammerForm.intention.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>            
+            <p>
+                {{scammerForm.submit()}}
+            </p>
+        </form>
+        
+{% endblock %}

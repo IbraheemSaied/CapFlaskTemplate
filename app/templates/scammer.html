@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if scammer %}
+
+{{moment(scammer.createdate).calendar()}}<br> by {{scammer.reporter.username}}<br>
+{% if scammer.modifydate %}
+    Modified {{moment(scammer.modifydate).calendar()}}
+{% endif %}
+<br>
+    {% if scammer.reporter == current_user %}
+        <a data-toggle="tooltip" data-placement="top" title="Delete Scammer Info" href="/scammer/delete/{{scammer.id}}">
+            <img width="40" class="bottom-image" src="/static/delete.png">
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Edit Scammer" href="/scammer/edit/{{scammer.id}}">
+            <img width="40" class="bottom-image" src="/static/edit.png">
+        </a>
+    {% endif %}
+
+    <h1 class="display-5">{{scammer.scamNumber}}</h1>
+    <p class="fs-3 text-break">
+        <img width="120" class="img-thumbnail float-start me-2" src="data:image;base64,{{base64encode(scammer.reporter.image.read())}}">
+        {{scammer.country}}<br>
+        {{scammer.scamNumber}}<br>
+        {{scammer.intention}}<br>
+
+    </p>
+    <a href="/comment/new/{{scammer.id}}" class="btn btn-primary btn-sm" role="button">New Comment</a>
+
+{% else %}
+    <h1 class="display-5">No Scammer</h1>
+{% endif %}
+
+{% endblock %}

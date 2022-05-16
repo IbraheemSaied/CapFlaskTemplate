@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<style>
+body {
+background-image: linear-gradient(#FFFFFF, rgb(187, 216, 21));
+}
+
+
+
+</style>
+
+<form method=post>
+    {{ form.hidden_tag() }}
+    
+    {{ form.status.label }} <br>
+    {{ form.status() }}
+
+    {{form.submit()}}
+</form>
+
+
+{% if msgs %}
+    {% for msg in msgs %}
+        <div class="row border-bottom">
+            <div class="col-1">
+                {% if loop.index == 1 %}
+                <h5 class="display-7"></h5>
+                {% endif %} 
+                <a href="">
+                    Remove
+                </a>
+                 - 
+                 <a href="/msg/edit/{{msg.id}}">
+                    Edit
+                </a>
+                           
+            </div>
+            <div class="col-1">
+                {% if loop.index == 1 %}
+                    <h5 class="display-9">Status</h5>
+                {% endif %}
+                {{msg.status}}  
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                <h5 class="display-9">Date</h5>
+                {% endif %}
+                    {{msg.date_sent}}
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                <h5 class="display-9">From</h5>
+                {% endif %}
+                    {{msg.from_}}
+            </div>
+            <div class="col">
+                {% if loop.index == 1 %}
+                    <h5 class="display-9">To</h5>
+                {% endif %}
+                {{msg.to}}
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                    <h5 class="display-9">Body</h5>
+                {% endif %}
+                {{msg.body}}
+            </div>
+            <div class="col-2">
+                {% if loop.index == 1 %}
+                    <h5 class="display-9">SID</h5>
+                {% endif %}
+                {{msg.sid}}  
+            </div>
+
+        </div>
+    {% endfor %}
+{% else %}
+
+    <h1>No Messages</h1>
+{% endif %}
+{% endblock %}
